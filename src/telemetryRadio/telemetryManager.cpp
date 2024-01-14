@@ -56,7 +56,7 @@ namespace PT {
 		while (true) {
 			uint32_t startTime = pros::millis();
 			this->update();
-			pros::Task::delay(std::min(10 - (pros::millis() - startTime), (long unsigned int) 10));
+			pros::Task::delay(std::min(updateTime - (pros::millis() - startTime), (long unsigned int) updateTime));
 		}
 	}
 

@@ -16,7 +16,7 @@ namespace PT {
 	 * @brief Baudrate of the serial connection between the Brain and the Telemetry radio, only change this if you know what you're doing
 	 * 
 	 */
-	const int TELEMETRY_RADIO_BAUDRATE = 921600;
+	#define TELEMETRY_RADIO_BAUDRATE 115200
 
 	class TelemetryRadio : public Transmitter {
 	private:

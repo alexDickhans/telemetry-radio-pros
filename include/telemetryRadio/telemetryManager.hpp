@@ -10,6 +10,7 @@
 #include "logger.hpp"
 #include "measurementTypes/measurement.hpp"
 #include "measurementTypes/functionMeasurement.hpp"
+#include "measurementTypes/variableMeasurement.hpp"
 #include "telemetryRadio.hpp"
 #include "transmitter.hpp"
 #include "usb.hpp"
@@ -24,12 +25,13 @@ namespace PT {
 
 		std::shared_ptr<pros::Task> updateTask;
 		bool taskRunning;
-		uint16_t updateTime;
 
 		std::vector<std::shared_ptr<Transmitter>> transmitters;
 
 		std::vector<std::shared_ptr<Measurement>> measurementSources;
 		Logger* defaultLogger;
+
+		uint32_t updateTime{10};
 	protected:
 		void updateScheduler();
 
@@ -64,6 +66,14 @@ namespace PT {
 		 * 
 		*/
 		bool disableUpdateScheduler();
+
+		uint32_t getUpdateTime() {
+			return updateTime;
+		}
+
+		void setUpdateTime(uint32_t updateTime) {
+			this->updateTime = updateTime;
+		}
 
 		void addTransmitter(std::shared_ptr<Transmitter> newTransmitter);
 

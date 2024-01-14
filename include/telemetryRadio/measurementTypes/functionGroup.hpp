@@ -1,0 +1,14 @@
+//
+// Created by alex on 11/12/23.
+//
+
+#ifndef TELEMETRY_RADIO_PROS_FUNCTIONGROUP_HPP
+#define TELEMETRY_RADIO_PROS_FUNCTIONGROUP_HPP
+
+
+class functionGroup {
+
+};
+
+
+#endif //TELEMETRY_RADIO_PROS_FUNCTIONGROUP_HPP

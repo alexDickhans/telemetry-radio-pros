@@ -3,6 +3,11 @@
 PT::TelemetryManager* telemetryManager;
 PT::Logger* logger;
 
+pros::Controller controller1(CONTROLLER_MASTER);
+
+int left = 0;
+int right = 0;
+
 /**
  * A callback function for LLEMU's center button.
  *
@@ -38,8 +43,13 @@ void initialize() {
 	telemetryManager->addTransmitter(std::make_shared<PT::USB>(new PT::PassThroughEncoding()));
 	telemetryManager->addTransmitter(std::make_shared<PT::TelemetryRadio>(20, new PT::PassThroughEncoding()));
 	telemetryManager->addMeasurementSource(std::make_shared<PT::FunctionMeasurement<uint64_t>>("System", "Micros", pros::micros));
-	telemetryManager->addMeasurementSource(std::make_shared<PT::FunctionMeasurement<uint32_t>>("System", "Millis", pros::millis));
+	telemetryManager->addMeasurementSource(std::make_shared<PT::FunctionMeasurement<int>>("ControllerLeftX", "Value", []() -> int {return controller1.get_analog(ANALOG_LEFT_X);}));
+	telemetryManager->addMeasurementSource(std::make_shared<PT::FunctionMeasurement<int>>("ControllerRightX", "Value", []() -> int {return controller1.get_analog(ANALOG_RIGHT_X);}));
+	telemetryManager->addMeasurementSource(std::make_shared<PT::FunctionMeasurement<int>>("ControllerLeftY", "Value", []() -> int {return controller1.get_analog(ANALOG_LEFT_Y);}));
+	telemetryManager->addMeasurementSource(std::make_shared<PT::FunctionMeasurement<int>>("ControllerRightY", "Value", []() -> int {return controller1.get_analog(ANALOG_RIGHT_Y);}));
+	// telemetryManager->addMeasurementSource(std::make_shared<PT::FunctionMeasurement<uint32_t>>("System", "Millis", pros::millis));
 	telemetryManager->addMeasurementSource(std::make_shared<PT::Measurement>("Test"));
+	telemetryManager->setUpdateTime(20);
 	telemetryManager->enableUpdateScheduler();
 }
 
@@ -97,8 +107,8 @@ void opcontrol() {
 		                 (pros::lcd::read_buttons() & LCD_BTN_CENTER) >> 1,
 		                 (pros::lcd::read_buttons() & LCD_BTN_RIGHT) >> 0);
 		logger->info("hello");
-		int left = master.get_analog(ANALOG_LEFT_Y);
-		int right = master.get_analog(ANALOG_RIGHT_Y);
+		left = master.get_analog(ANALOG_LEFT_Y);
+		right = master.get_analog(ANALOG_RIGHT_Y);
 
 		left_mtr = left;
 		right_mtr = right;
