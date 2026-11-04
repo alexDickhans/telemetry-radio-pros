@@ -15,3 +15,21 @@ temp.log
 temp.errors
 *.ini
 .d/
+
+# Local language-server and editor files
+.clangd/
+.ccls
+.ccls-cache/
+cquery_log.txt
+.*.sw*
+
+# CLion / IntelliJ. This project builds with the PROS Makefile.
+.idea/
+
+# Staging directory created by `make template`.
+# libTelemetryRadio@<version>.zip is the installable template and stays tracked.
+template/
+
+# OS files
+.DS_Store
+Thumbs.db

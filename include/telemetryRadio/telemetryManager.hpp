@@ -47,24 +47,21 @@ namespace PT {
 		static TelemetryManager* getInstance();
 
 		/**
-		 * @brief 
-		 * 
-		 * If this->taskRunning this method will be called automatically by a 
-		 * task created in the constructor and calling it will increase bandwidth and duplicate data.
-		 * You can override creating this task by setting the optional parameter "createTask" to 
-		 * false in the constructor, or by setting taskRunning to false in the .setTaskRunning(bool) method
-		 * 
+		 * @brief Sample every measurement, then send changed values and new log lines.
+		 *
+		 * enableUpdateScheduler() starts a task that calls this method. Calling update()
+		 * from user code while that task is running sends a second copy of the data.
 		 */
 		void update();
 
 		/**
-		 * @brief 
-		*/
+		 * @brief Start a PROS task that calls update() about every updateTime milliseconds.
+		 */
 		bool enableUpdateScheduler();
 
 		/**
-		 * 
-		*/
+		 * @brief Return taskRunning. The scheduler task is left running, and taskRunning is never assigned.
+		 */
 		bool disableUpdateScheduler();
 
 		uint32_t getUpdateTime() {

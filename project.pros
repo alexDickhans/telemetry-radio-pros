@@ -308,7 +308,7 @@
       }
     },
     "upload_options": {
-      "description": "Telemetry "
+      "description": "Telemetry radio"
     },
     "project_name": "telemetry-radio-pros"
   }
